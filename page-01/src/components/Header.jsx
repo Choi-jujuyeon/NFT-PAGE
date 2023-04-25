@@ -1,19 +1,19 @@
-import { FaChessRook } from "react-icons/fa";
-import { BiWallet } from "react-icons/bi";
-import { AiFillHeart } from "react-icons/ai";
+import { GiSharpCrown } from "react-icons/gi";
+import { GrGoogleWallet } from "react-icons/gr";
+import { BsChatHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = ({ account, setAccount }) => {
     const [coinPrice, setCoinPrice] = useState();
-
     const getCoinPrice = async () => {
         try {
             const response = await axios.get(
                 "https://api.upbit.com/v1/ticker?markets=KRW-BTC,%20KRW-ETH,%20KRW-MATIC"
             );
 
+            //console.log(response);
             setCoinPrice([
                 { symbol: "BTC", price: response.data[0].trade_price },
                 { symbol: "ETH", price: response.data[1].trade_price },
@@ -35,16 +35,14 @@ const Header = ({ account, setAccount }) => {
             console.error(error);
         }
     };
-
     useEffect(() => {
         getCoinPrice();
     }, []);
-
     return (
-        <header className="max-w-screen-xl mx-auto p-4 flex justify-between items-center font-bold">
+        <header className="max-w-screen-xl p-4 flex items-center justify-between font-bold">
             <Link to="/">
                 <div className="flex items-center text-main">
-                    <FaChessRook size={28} />
+                    <GiSharpCrown size={28} />
                     <div className="ml-1 text-xl">Ble-Chess</div>
                 </div>
             </Link>
@@ -55,7 +53,7 @@ const Header = ({ account, setAccount }) => {
                             return (
                                 <li key={i} className="ml-2">
                                     {v.symbol}:{" "}
-                                    {(v.price / 1000).toLocaleString()}K₩
+                                    {(v.price / 1000).toLocaleString()}KW
                                 </li>
                             );
                         })}
@@ -64,7 +62,7 @@ const Header = ({ account, setAccount }) => {
                 {account ? (
                     <div className="flex items-center p-2 bg-gray-800 rounded-full ml-4">
                         <div className="bg-main w-6 h-6 rounded-full flex justify-center items-center">
-                            <AiFillHeart />
+                            <BsChatHeart />
                         </div>
                         <div className="ml-1">
                             {account.substring(0, 4)}...
@@ -77,7 +75,7 @@ const Header = ({ account, setAccount }) => {
                         onClick={onClickAccount}
                     >
                         <div className="bg-main w-6 h-6 rounded-full flex justify-center items-center">
-                            <BiWallet />
+                            <GrGoogleWallet />
                         </div>
                         <div className="ml-1">Connect</div>
                     </button>
@@ -86,5 +84,4 @@ const Header = ({ account, setAccount }) => {
         </header>
     );
 };
-
 export default Header;
