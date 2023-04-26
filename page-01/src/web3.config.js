@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x6Ac6FFd39442DFf991c453B96Ab35C80884dCa0D";
+export const CONTRACT_ADDRESS = "0xb5e800e177628fAF0De026b3B48b3b330c694ad2";
 export const CONTRACT_ABI = [
     {
         inputs: [
@@ -314,6 +314,19 @@ export const CONTRACT_ABI = [
                 internalType: "string",
                 name: "",
                 type: "string",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "mintedNft",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
             },
         ],
         stateMutability: "view",
