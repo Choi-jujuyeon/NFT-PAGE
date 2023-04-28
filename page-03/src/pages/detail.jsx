@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GiHeartKey } from "react-icons/gi";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
     const [metadata, setMetadata] = useState();
@@ -27,7 +27,7 @@ const Detail = () => {
     useEffect(() => console.log(metadata), [metadata]);
 
     return (
-        <div className="flex flex-col xl:flex-row justify-center items-center py-16 bg-gray-900">
+        <div className="flex flex-col xl:flex-row justify-center items-center py-16 min-h-screen bg-gray-900">
             {metadata ? (
                 <>
                     <div className="max-w-[512px]">
@@ -52,11 +52,13 @@ const Detail = () => {
                     <div className="m-8">
                         <div className="text-4xl  font-bold text-lime-100 flex items-center">
                             <div>{metadata.name}</div>
-                            <div className="bg-lime-300 w-8 h-8 rounded-full flex justify-center items-center ml-2 text-gray-950">
-                                <GiHeartKey size={18} />
-                            </div>
+                            <Link to="/Main">
+                                <div className="bg-lime-300 w-8 h-8 rounded-full flex justify-center items-center ml-2 text-gray-950">
+                                    <GiHeartKey size={18} />
+                                </div>
+                            </Link>
                         </div>
-                        <div className="mt-8 text-2xl">
+                        <div className="mt-8 text-white text-2xl">
                             {metadata.description}
                         </div>
                     </div>
