@@ -19,8 +19,9 @@ const MainHeader = ({ account, setAccount }) => {
     return (
         <div className="flex py-4 text-xl font-bold bg-black text-slate-300	 justify-between items-center">
             <Link to="/">
-                <div>
-                    <GiSharpCrown size={40} className="text-lime-300 ml-10" />
+                <div className="flex justify-center items-center">
+                    <GiSharpCrown size={40} className="text-lime-300  ml-10" />
+                    <div className="ml-3 ">Udangtangtang-BCS</div>
                 </div>
             </Link>
 
