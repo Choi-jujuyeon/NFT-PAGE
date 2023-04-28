@@ -1,0 +1,99 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import NftCard from "./NftCard";
+
+const Nfts = ({ page, mintedNft }) => {
+    const [selectedPage, setSelectedPage] = useState(1);
+    const [nfts, setNfts] = useState();
+
+    const getNfts = async (p) => {
+        try {
+            let nftArray = [];
+
+            setNfts();
+            for (let i = 0; i < 10; i++) {
+                const tokenId = i + 1 + (p - 1) * 10;
+
+                let response = await axios.get(
+                    `${process.env.REACT_APP_JSON_URL}/${tokenId}.json`
+                );
+
+                nftArray.push({ tokenId, metadata: response.data });
+            }
+
+            setNfts(nftArray);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const onClickPage = (p) => () => {
+        setSelectedPage(p);
+
+        getNfts(p);
+    };
+
+    const pageComp = () => {
+        let pageArray = [];
+
+        for (let i = 0; i < page; i++) {
+            pageArray.push(
+                <button
+                    key={i}
+                    className={`
+                    ml-4 text-2xl font-bold hover:text-white ${
+                        i + 1 === selectedPage
+                            ? "text-white border-b-2 border-lime-200"
+                            : "text-gray-400"
+                    }`}
+                    onClick={onClickPage(i + 1)}
+                >
+                    {i + 1} <span className="text-base">페이지</span>
+                </button>
+            );
+        }
+
+        return pageArray;
+    };
+
+    useEffect(() => {
+        console.log(nfts);
+    }, [nfts]);
+
+    useEffect(() => {
+        getNfts(1);
+    }, []);
+
+    return (
+        <div className="  max-w-screen-xl mx-auto pt-4">
+            <div>{pageComp()}</div>
+
+            <div className="flex flex-row">
+                <ul
+                    className="border-t-2 border-lime-900
+            
+            pt-10 grid grid-cols-1 xl:grid-cols-4 justify-items-center gap-8"
+                >
+                    {/* ntfs? "있을 때 " : "없을 때" */}
+
+                    {nfts ? (
+                        nfts.map((v, i) => {
+                            return (
+                                <NftCard
+                                    key={i}
+                                    tokenId={v.tokenId}
+                                    metadata={v.metadata}
+                                    mintedNft={mintedNft}
+                                />
+                            );
+                        })
+                    ) : (
+                        <div>로딩중입니다...</div>
+                    )}
+                </ul>
+            </div>
+        </div>
+    );
+};
+
+export default Nfts;
