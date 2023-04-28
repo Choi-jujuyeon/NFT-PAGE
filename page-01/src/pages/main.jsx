@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Intro from "../components/Into";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
 import Nfts from "../components/Nfts";
+import Detail from "./detail";
 
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
