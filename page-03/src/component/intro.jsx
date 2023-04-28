@@ -1,6 +1,6 @@
 import { GiSharpCrown } from "react-icons/gi";
 import { CONTRACT_ADDRESS } from "../web3.config";
-const ranNum = Math.floor(Math.random() * 50) + 1;
+const ranNum = Math.floor(Math.random() * 100) + 1;
 // const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
 
 const imgSrc = `https://olbm.mypinata.cloud/ipfs/QmaHqh8ERAekGsZENes6weNQSaRA6Y4mPiowHBAuMEiCo1/${ranNum}.png`;
